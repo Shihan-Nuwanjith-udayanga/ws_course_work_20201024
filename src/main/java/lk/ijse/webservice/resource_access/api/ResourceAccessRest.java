@@ -26,8 +26,6 @@ public class ResourceAccessRest extends HttpServlet {
             System.out.println(e);
         }
 
-        req.getSession().getServletContext().setAttribute("name", "abc");
-
         String payloadString = jb.toString();
 
         Gson gson = new Gson();
@@ -35,7 +33,7 @@ public class ResourceAccessRest extends HttpServlet {
         System.out.println(msg);
 
         req.getSession().setAttribute("session_key", System.nanoTime());
-        System.out.println("Session Key : " + req.getSession().getAttribute("session_key"));
+        System.out.println("Session Key : "+ req.getSession().getAttribute("session_key"));
 
 
         resp.getWriter().println("OK");
@@ -50,10 +48,7 @@ public class ResourceAccessRest extends HttpServlet {
         Gson gson = new Gson();
         String json = gson.toJson(message);
 
-        System.out.println("Session Key : " + req.getSession().getAttribute("session_key"));
-        System.out.println("Application Scope Name "+req.getSession().getServletContext().getAttribute("name"));
-
-
+        System.out.println("Session Key : "+ req.getSession().getAttribute("session_key"));
         res.setContentType("application/json");
         res.setStatus(HttpServletResponse.SC_OK);
         res.getWriter().println(json);
